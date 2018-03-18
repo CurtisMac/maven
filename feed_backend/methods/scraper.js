@@ -1,5 +1,6 @@
 const twingly = require('../apis/twingly')
 const Article = require('../models/article')
+const Tracker = require('../models/queryTracker')
 const ranker = require('./ranker')
 
 const scraper = async ({ lang, query }) => {
@@ -10,13 +11,14 @@ const scraper = async ({ lang, query }) => {
                 title: obj.title,
                 authors: obj.authors,
                 url: obj.url,
-                pubDate: obj.pubDate,
+                pubDate: new Date(obj.pubDate),
+                addDate: Date.now(),
                 summary: obj.summary,
                 lang: obj.lang,
                 rank: 0,
                 rankData: {
                     lastUpdate: 15000000000,
-                    //bklinks should not be added by the scraper, this is a workaround for API trial version limitations
+                    //bklinks should not be added by the scraper, this is a workaround due to API trial version limitations
                     backlinks: obj.bklinks,
                     facebook: 0,
                     pinterest: 0,
@@ -37,19 +39,32 @@ const scraper = async ({ lang, query }) => {
                 .then(article => {
                     ranker([article._id])
                 })
-                .catch(err => {
-                    console.log(err)
+                .catch(e => {
+                    if(e){
+                    console.error(e)
+                    }
                 })
         })
-    } catch (err) {
-        console.log(err)
+        Tracker.findOneAndUpdate(
+            { query: query },
+            { lastRun: Date.now() },
+            { upsert: true },
+            function (e, doc) {
+                if(e){
+                console.error(e)}
+            }
+        )
+        return {
+            success: true
+        }
+    } catch (e) {
+        console.error(e)
+        return {
+            success: false
+        }
     }
 }
 
 module.exports = scraper
 
-    //Promise
-    //Check when twingly was last scraped for specified query
-    //If more than specified timeout, run twingly
-    //Update db
 

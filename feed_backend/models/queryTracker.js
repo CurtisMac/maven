@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 
 const trackerSchema = new Schema({
     query: String,
-    lastRun: Date
+    lastRun: Number
 })
 
 const Tracker = mongoose.model('Tracker', trackerSchema)

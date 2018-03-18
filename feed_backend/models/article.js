@@ -9,7 +9,8 @@ const articleSchema = new Schema({
         required: true,
         unique: true
     },
-    pubDate: String,
+    pubDate: Date,
+    addDate: Date,
     summary: String,
     lang: String,
     rank: Number,

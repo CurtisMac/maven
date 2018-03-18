@@ -1,7 +1,7 @@
 const keys = require('./keys')
 const axios = require('axios')
 const parseString = require('xml2js').parseString
-const ArticleObj = require('../functions/articleConstructor')
+const ArticleObj = require('../methods/articleConstructor')
 
 const twingly = ({ lang, query }) => {
     const url = `https://api.twingly.com/blog/search/api/v3/search?apikey=${keys.twingly}&q=${query}%20lang:${lang}%20sort:twinglyrank%20page-size:2`

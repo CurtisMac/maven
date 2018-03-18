@@ -5,7 +5,7 @@ const contr = require('../controllers/apiControllers')
 apiRouter.use(contr.veriftyJWT)
 
 apiRouter.get('/profile', async (req, res) => {
-    const { id } = req.decoded 
+    const { id } = req.decoded
     try {
         res.json(await contr.getProfile(id))
     } catch (e) {
@@ -15,56 +15,45 @@ apiRouter.get('/profile', async (req, res) => {
 })
 
 apiRouter.route('/articles')
-    // .get((req, res) => {
-    //     let { article } = req.headers
-    //     res.json(' /articles sent request for ' + article)
-    // })
-    // .post((req, res) => {
-    //     res.json('user info sent here ' + user)
-    // })
-    .put(async (req, res) => {
-        let { article, destination } = req.headers
+    .get(async (req, res) => {
         const { id } = req.decoded
         try {
-            res.json(await contr.addToList(article, destination, id))
+            res.json(await contr.getArticles(id))
         } catch (e) {
             console.error(e)
             res.json({ success: false })
         }
     })
-    .delete(async (req, res) => {
-        let { itemnum, destination } = req.headers
+    .post(async (req, res) => {
+        const { article, method, array } = req.headers
         const { id } = req.decoded
+        const data = method==='push' ?
+            {
+                articleId: article,
+                read: false
+            } :
+            {
+                _id: article
+            }
         try {
-            res.json(await contr.removeFromList(itemnum, destination, id))
+            res.json(await contr.updateUserArray(data, method, array, id))
         } catch (e) {
             console.error(e)
             res.json({ success: false })
         }
     })
 
-apiRouter.route('/categories')
-    .put(async (req, res) => {
+apiRouter.post('/categories', async (req, res) => {
+        const { cat, method } = req.headers
         const { id } = req.decoded
-        const { cat } = req.headers
-        const method = 'push'
+        const array = 'categories'
         try {
-            res.json(await contr.updateCategories(cat, id, method))
+            res.json(await contr.updateUserArray(cat, method, array, id))
         } catch (e) {
             console.error(e)
             res.json({ success: false })
         }
     })
-    .delete( async (req, res) => {
-        const { id } = req.decoded
-        const { cat } = req.headers
-        const method = 'pull'
-        try {
-            res.json(await contr.updateCategories(cat, id, method))
-        } catch (e) {
-            console.error(e)
-            res.json({ success: false })
-        }
-    })
+
 
 module.exports = apiRouter

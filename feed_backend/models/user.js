@@ -11,7 +11,7 @@ const toReadSchema = new Schema({
     read: Boolean,
 })
 
-const haveReadSchema = new Schema({
+const archiveSchema = new Schema({
     articleId:
         {
             type: String,
@@ -35,9 +35,8 @@ const userSchema = new Schema({
     languages: [],
     categories: [],
     currentSuggestions: [],
-    excludedArticles: [],
     toRead: [toReadSchema],
-    haveRead: [haveReadSchema]
+    archive: [archiveSchema]
 })
 
 const User = mongoose.model('User', userSchema)

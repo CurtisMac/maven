@@ -21,6 +21,16 @@ const archiveSchema = new Schema({
     notes: String,
 })
 
+const categoriesSchema = new Schema({
+    name:
+        {
+            type: String,
+            required: true,
+            unique: true,
+        },
+    lastUpdate: Date,
+})
+
 const userSchema = new Schema({
     id: Number,
     username: {
@@ -33,7 +43,7 @@ const userSchema = new Schema({
         required: true,
     },
     languages: [],
-    categories: [],
+    categories: [categoriesSchema],
     currentSuggestions: [],
     toRead: [toReadSchema],
     archive: [archiveSchema]

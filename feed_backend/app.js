@@ -21,9 +21,11 @@ app.use('/', loginRouter)
 app.use('/', signupRouter)
 app.use('/', apiRouter)
 
-// const scraper = require('./functions/scraper')
-// // scraper({ lang: 'en', query: '' })
+// const scraper = require('./methods/scraper')
+// scraper({ lang: 'en', query: 'bitcoin' })
 
 // const ranker = require('./functions/ranker')
+
+const getCurrentSugs = require('./methods/getCurrentSugs')
 
 module.exports = app

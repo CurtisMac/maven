@@ -5,6 +5,7 @@ const ranker = require('./ranker')
 
 const scraper = async ({ lang, query }) => {
     try {
+        //add logic that will check when query was last updated (if it exists) and only rescrape if necessary
         const data = await twingly({ lang, query })
         data.forEach(obj => {
             let newArticle = Article({

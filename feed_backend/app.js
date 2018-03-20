@@ -27,5 +27,6 @@ app.use('/', apiRouter)
 // const ranker = require('./functions/ranker')
 
 const getCurrentSugs = require('./methods/getCurrentSugs')
+const updUserSug = require('./methods/updUserSug')
 
 module.exports = app

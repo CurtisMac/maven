@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import colors  from '../../assets/palette'
+import colors  from '../../../assets/palette'
 import CatButton from './CatButton'
 
 

@@ -13,7 +13,7 @@ class CatButton extends Component {
                 circular 
                 inverted 
                 size='tiny' 
-                color='white'
+                color='facebook'
                 >{this.props.str}
             </Button>
         )

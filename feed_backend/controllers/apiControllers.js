@@ -4,6 +4,7 @@ const User = require('../models/user')
 const Article = require('../models/article')
 const scraper = require('../methods/scraper')
 const convertArticleIds = require('../methods/convertArticleIds')
+const getCurrentSugs = require('../methods/getCurrentSugs')
 
 const contr = {
 
@@ -28,12 +29,16 @@ const contr = {
     getProfile: async (id) => {
         try {
             let data = await User.findById(id)
+            let articles = await convertArticleIds(data.currentSuggestions)
+            getCurrentSugs(id)
             return {
                 languages: data.languages,
-                categories: data.categories,
-                currentSuggestions: data.currentSuggestions,
+                categories: data.categories.map((obj)=>{
+                    return obj.name
+                }),
                 toRead: data.toRead,
-                haveRead: data.haveRead
+                haveRead: data.haveRead,
+                articles: articles
             }
         } catch (e) {
             console.error(e)
@@ -64,7 +69,8 @@ const contr = {
     },
 
     veriftyJWT: (req, res, next) => {
-        let { token } = req.headers
+        let { token } = req.body
+        console.log(req.body)
         if (token) {
             try {
                 let decoded = jwt.verify(token, config.tokenKey)
@@ -78,6 +84,7 @@ const contr = {
                 })
             }
         } else {
+            console.log('no key')
             return res.status(403).send({
                 success: false,
                 error: 'No token provided'

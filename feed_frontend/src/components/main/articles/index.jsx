@@ -3,7 +3,12 @@ import Article from './article'
 import { Container, Item } from 'semantic-ui-react'
 
 function Articles(props) {
-    const cards = props.articles.map((article, i) => {
+    const filteredArticles = props.currentCat ==='All' ? props.articles :
+    props.articles.filter((art)=>{
+        return art.tags.join(' ').toLowerCase().includes(props.currentCat.toLowerCase())
+    })
+    
+    const artList = filteredArticles.map((article, i) => {
         return <Article
             data={article}
             key={i}
@@ -12,7 +17,7 @@ function Articles(props) {
     return (
         <Container>
             <Item.Group divided>
-                {cards}
+                {artList}
             </Item.Group >
         </Container>
     )

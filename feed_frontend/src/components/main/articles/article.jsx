@@ -1,16 +1,14 @@
 import React from 'react'
-// import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-import { Button, Icon, Image as ImageComponent, Item, Label } from 'semantic-ui-react'
+import { Item, Label } from 'semantic-ui-react'
 const faker = require('faker')
 
 function Article(props) {
     let a = props.data
-    let imgUrl = faker.random.image()
     return (
         <Item>
-            <Item.Image size='tiny' src={imgUrl} />
+            <Item.Image size='tiny' src={faker.random.image()} />
             <Item.Content>
-                <Item.Header as='a'><a href={a.url} target='_blank'>{a.title}</a></Item.Header>
+                <Item.Header><a href={a.url} target='_blank'>{a.title}</a></Item.Header>
                 <Item.Meta>
                     <span className='cinema'>{a.summary}4</span>
                 </Item.Meta>

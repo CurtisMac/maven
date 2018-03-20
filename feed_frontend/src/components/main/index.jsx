@@ -12,7 +12,7 @@ class Main extends Component {
         this.state = {
             cats: ['All'],
             articles: [],
-            currentCat: 'all'
+            currentCat: 'All'
         }
     }
 
@@ -23,10 +23,9 @@ class Main extends Component {
     }
 
     componentDidMount() {
-        let data = { token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYWM3MTdjMTYyNTBkNDU3MGVjNjNjMCIsImlhdCI6MTUyMTMxNzM3MCwiZXhwIjoxNTIxNTc2NTcwfQ.UQJ4sQb-TFyTRXzeeT6IJXzVfTJ1d2ULlY3XEBl6siM'}
-        axios.post('http://localhost:8080/profile', {
-            something: 'else',
-            token: data
+        let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYWM3MTdjMTYyNTBkNDU3MGVjNjNjMCIsImlhdCI6MTUyMTU3Njg0MywiZXhwIjoxNTIxODM2MDQzfQ.IM4huDfZs5Yzy_UZNyz01kNtkPqQB2DbHA8Ddy_C2D8'
+        axios.post(`${config.serverUrl}/profile`, {
+            token: token,
         })
             .then(response => {
                 let cats = this.state.cats.concat(response.data.categories)

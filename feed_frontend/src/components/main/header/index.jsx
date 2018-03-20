@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import colors  from '../../../assets/palette'
-import CatButton from './CatButton'
+import CatButton from './catButton'
 
 
 const divStyles = {

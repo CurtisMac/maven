@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Main from './main'
-import axios from 'axios'
 // import {Container} from 'semantic-ui-react'
 
 class App extends Component {

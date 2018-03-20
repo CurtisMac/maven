@@ -10,22 +10,28 @@ class Main extends Component {
     constructor() {
         super()
         this.state = {
-            cats: [],
+            cats: ['All'],
             articles: [],
             currentCat: 'all'
         }
     }
 
-    componentWillMount() {
+    catFilter = (cat)=> {
+        this.setState({
+          currentCat: cat  
+        })
+    }
+
+    componentDidMount() {
         let data = { token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYWM3MTdjMTYyNTBkNDU3MGVjNjNjMCIsImlhdCI6MTUyMTMxNzM3MCwiZXhwIjoxNTIxNTc2NTcwfQ.UQJ4sQb-TFyTRXzeeT6IJXzVfTJ1d2ULlY3XEBl6siM'}
         axios.post('http://localhost:8080/profile', {
             something: 'else',
             token: data
         })
             .then(response => {
-                console.log(response.data)
+                let cats = this.state.cats.concat(response.data.categories)
                 this.setState({
-                    cats: response.data.categories,
+                    cats: cats,
                     articles: response.data.articles
                 })
             })
@@ -40,7 +46,7 @@ class Main extends Component {
             <div>
                 <Header
                     cats={this.state.cats}
-                    currentCat={this.state.currentCat}
+                    catFilter={this.catFilter}
                 />
                 <Articles 
                     currentCat={this.state.currentCat}

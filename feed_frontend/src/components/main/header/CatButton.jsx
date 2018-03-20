@@ -13,8 +13,9 @@ class CatButton extends Component {
                 circular 
                 inverted 
                 size='tiny' 
-                color='facebook'
-                >{this.props.str}
+                color='google'
+                onClick={()=>{this.props.catFilter(this.props.cat)}}
+                >{this.props.cat}
             </Button>
         )
     }

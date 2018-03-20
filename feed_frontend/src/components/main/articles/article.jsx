@@ -4,7 +4,6 @@ import { Button, Icon, Image as ImageComponent, Item, Label } from 'semantic-ui-
 const faker = require('faker')
 
 function Article(props) {
-    console.log(props)
     let a = props.data
     let imgUrl = faker.random.image()
     return (

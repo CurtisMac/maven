@@ -17,14 +17,9 @@ app.use((req, res, next) => {
     next()
 })
 
-app.use('/', loginRouter)
-app.use('/', signupRouter)
+app.use('/login', loginRouter)
+app.use('/signup', signupRouter)
 app.use('/', apiRouter)
-
-// const scraper = require('./methods/scraper')
-// scraper({ lang: 'en', query: 'bitcoin' })
-
-// const ranker = require('./functions/ranker')
 
 const getCurrentSugs = require('./methods/getCurrentSugs')
 const updUserSug = require('./methods/updUserSug')

@@ -4,32 +4,7 @@ const contr = require('../controllers/apiControllers')
 const config = require('../config')
 const jwt = require('jsonwebtoken')
 
-apiRouter.use((req, res, next) => {
-    let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYWM3MTdjMTYyNTBkNDU3MGVjNjNjMCIsImlhdCI6MTUyMTMxNzM3MCwiZXhwIjoxNTIxNTc2NTcwfQ.UQJ4sQb-TFyTRXzeeT6IJXzVfTJ1d2ULlY3XEBl6siM'
-    // let {token} = req.body
-    console.log(req.body)
-    if (token) {
-        try {
-            let decoded = jwt.verify(token, config.tokenKey)
-            req.decoded = decoded
-            next()
-        } catch (e) {
-            console.error(e)
-            return res.status(403).send({
-                success: false,
-                error: 'Invalid Token'
-            })
-        }
-    } else {
-        console.log('no key')
-        return res.status(403).send({
-            success: false,
-            error: 'No token provided'
-        })
-    }
-})
-
-apiRouter.post('/profile', async (req, res) => {
+apiRouter.post('/profile', contr.veriftyJWT, async (req, res) => {
     const { id } = req.decoded
     try {
         res.json(await contr.getProfile(id))

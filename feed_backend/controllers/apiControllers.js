@@ -30,7 +30,7 @@ const contr = {
         try {
             let data = await User.findById(id)
             let articles = await convertArticleIds(data.currentSuggestions)
-            getCurrentSugs(id)
+            // getCurrentSugs(id)
             return {
                 languages: data.languages,
                 categories: data.categories.map((obj)=>{

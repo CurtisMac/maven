@@ -34,7 +34,10 @@ const contr = {
             return {
                 languages: data.languages,
                 categories: data.categories.map((obj)=>{
-                    return obj.name
+                    return {
+                            name: obj.name,
+                            id: obj._id    
+                        }
                 }),
                 toRead: data.toRead,
                 haveRead: data.haveRead,

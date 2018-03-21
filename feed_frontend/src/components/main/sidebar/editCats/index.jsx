@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Menu, Icon } from 'semantic-ui-react'
+import { Menu, Icon} from 'semantic-ui-react'
 
 import AddCat from './addCat'
 import RemoveCat from './removeCat'
@@ -28,7 +28,8 @@ class EditCats extends Component {
                             >Add Category
                         </Menu.Header>
                         {this.state.activeView === 'add' ? 
-                            <AddCat updateCats={this.props.updateCats}/> : 
+                            <AddCat 
+                                refreshData={this.props.refreshData}/> : 
                             null}
                     </Menu.Item>
                     <Menu.Item 
@@ -39,7 +40,10 @@ class EditCats extends Component {
                             >Remove Category
                         </Menu.Header>
                         {this.state.activeView === 'remove' ? 
-                            <RemoveCat updateCats={this.props.updateCats}/> 
+                            <RemoveCat 
+                                refreshData={this.props.refreshData}
+                                cats={this.props.cats}
+                            /> 
                             : 
                             null}
                     </Menu.Item>

@@ -20,10 +20,10 @@ const divStyles = {
 
 class Header extends Component {
     render(){
-        const catButtons = this.props.cats.map((str, i)=>{
+        const catButtons = this.props.cats.map((obj, i)=>{
             return <CatButton 
-                        key={i} 
-                        cat={str}
+                        key={obj.id} 
+                        cat={obj.name}
                         catFilter={this.props.catFilter}
                     />
         })

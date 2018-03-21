@@ -1,49 +1,49 @@
 import React, { Component } from 'react'
-import { Input, Button } from 'semantic-ui-react'
+import { Form } from 'semantic-ui-react'
 import config from '../../../../assets/config'
 import axios from 'axios'
 
 class AddCat extends Component {
+    constructor() {
+        super()
+        this.state = {
 
-    submit = (e) => {
-        e.preventDefault()
-        let entry = this.newText.value
-        this.newText.value = ''
-        if (entry === '') {
-            alert(`You didn't enter a category!`)
-        } else {
+        }
+    }
+
+    handleChange = (e, { name, value }) => {
+        this.setState({ [name]: value })
+    }
+
+    handleSubmit = () => {
+        let entry = this.state.name
+        if(entry){
             axios.post(`${config.serverUrl}/categories`, {
                 token: config.token,
                 method: 'push',
                 cat: entry
             })
                 .then(response => {
-                    console.log(response)
-                    this.props.updateCats(entry, 'add')
+                    this.props.refreshData()
                 })
                 .catch(e => {
                     console.log(e)
                 })
         }
-
+        this.setState({ name: '' })
     }
 
     render() {
         return (
-            <Input
-                action
-                placeholder='enter new category'>
-                <input
-                    type='text'
-                    id='newCat'
-                    ref={(input) => { this.newText = input }}>
-                </input>
-                <Button
-                    type='submit'
-                    onClick={this.submit}
-                >Add
-                </Button>
-            </Input>
+            <Form onSubmit={this.handleSubmit}>
+                <Form.Input
+                    placeholder='Enter a category'
+                    name='name'
+                    value={this.state.name}
+                    action='Add'
+                    onChange={this.handleChange}
+                />
+            </Form>
         )
     }
 }

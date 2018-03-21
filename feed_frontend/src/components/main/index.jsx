@@ -14,7 +14,7 @@ class Main extends Component {
     constructor() {
         super()
         this.state = {
-            cats: ['All'],
+            cats: [],
             articles: [],
             currentCat: 'All',
             menuVisible: false
@@ -33,11 +33,30 @@ class Main extends Component {
             const i = catArray.indexOf(cat)
             if(i!==-1){catArray.splice(i, 1)}
         } else if (method === 'add'){
-            catArray.push(cat)
+            catArray.push({ name: cat, id: 1 })
         }
         this.setState({
             cats:catArray
         })
+    }
+
+    refreshData = () => {
+        axios.post(`${config.serverUrl}/profile`, {
+            token: config.token,
+        })
+            .then(response => {
+                console.log(response.data)
+                let originalCat = [{ name: 'All', id: 0 }]
+                let cats = originalCat.concat(response.data.categories)
+                this.setState({
+                    cats: cats,
+                    articles: response.data.articles
+                })
+                console.log(this.state.cats)
+            })
+            .catch(e => {
+                console.log(e)
+            })
     }
 
     menuToggle = () => {
@@ -48,19 +67,7 @@ class Main extends Component {
 
 
     componentDidMount() {
-        axios.post(`${config.serverUrl}/profile`, {
-            token: config.token,
-        })
-            .then(response => {
-                let cats = this.state.cats.concat(response.data.categories)
-                this.setState({
-                    cats: cats,
-                    articles: response.data.articles
-                })
-            })
-            .catch(e => {
-                console.log(e)
-            })
+        this.refreshData()
     }
 
     render() {
@@ -81,7 +88,8 @@ class Main extends Component {
                         inverted
                         >
                         <LeftMenu 
-                            updateCats={this.updateCats}
+                            refreshData={this.refreshData}
+                            cats={this.state.cats}
                         />
                     </Sidebar>
                     <Sidebar.Pusher>

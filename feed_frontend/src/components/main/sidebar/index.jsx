@@ -10,7 +10,8 @@ function LeftMenu(props) {
                     Home
                 </Menu.Item>
                 <EditCats 
-                    updateCats={props.updateCats}
+                    refreshData={props.refreshData}
+                    cats={props.cats}
                 />
                 <Menu.Item name='camera'>
                     <Icon name='camera' />

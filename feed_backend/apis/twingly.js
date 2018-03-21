@@ -7,6 +7,7 @@ const twingly = ({ lang, query }) => {
     const url = `https://api.twingly.com/blog/search/api/v3/search?apikey=${keys.twingly}&q=${query}%20lang:${lang}%20sort:twinglyrank%20page-size:20`
     return axios.get(url)
         .then(response => {
+            console.log('Quried Twingly')
             let rawData
             parseString(response.data, function (err, result) {
                 rawData = result.twinglydata.post

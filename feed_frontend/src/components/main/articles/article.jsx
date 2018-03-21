@@ -1,6 +1,5 @@
 import React from 'react'
 import { Item, Label } from 'semantic-ui-react'
-const faker = require('faker')
 
 function Article(props) {
     const a = props.data

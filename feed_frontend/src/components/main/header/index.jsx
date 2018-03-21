@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import colors  from '../../../assets/palette'
 import CatButton from './catButton'
-import { Menu, Icon } from 'semantic-ui-react'
+import { Icon } from 'semantic-ui-react'
 
 
 const divStyles = {

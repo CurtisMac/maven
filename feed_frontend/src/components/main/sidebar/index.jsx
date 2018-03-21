@@ -1,5 +1,5 @@
 import React from 'react'
-import { Sidebar, Segment, Button, Menu, Image, Icon, Header } from 'semantic-ui-react'
+import { Menu, Icon } from 'semantic-ui-react'
 import EditCats from './editCats/index'
 
 function LeftMenu(props) {
@@ -9,7 +9,9 @@ function LeftMenu(props) {
                     <Icon name='home' />
                     Home
                 </Menu.Item>
-                <EditCats />
+                <EditCats 
+                    updateCats={props.updateCats}
+                />
                 <Menu.Item name='camera'>
                     <Icon name='camera' />
                     Channels

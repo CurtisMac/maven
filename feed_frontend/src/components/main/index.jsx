@@ -1,20 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import config from '../../assets/config'
-import palette from '../../assets/palette'
+// import palette from '../../assets/palette'
 
-import {
-    Button,
-    Container,
-    Divider,
-    Dropdown,
-    Message,
-    Segment,
-    Menu,
-    Icon,
-    Image,
-    Sidebar
-} from 'semantic-ui-react'
+import {Menu, Sidebar} from 'semantic-ui-react'
 
 //Import components here
 import Header from './header'
@@ -38,18 +27,29 @@ class Main extends Component {
         })
     }
 
+    updateCats = (cat, method) => {
+        let catArray = this.state.cats
+        if (method === 'remove'){
+            const i = catArray.indexOf(cat)
+            if(i!==-1){catArray.splice(i, 1)}
+        } else if (method === 'add'){
+            catArray.push(cat)
+        }
+        this.setState({
+            cats:catArray
+        })
+    }
+
     menuToggle = () => {
         this.setState({
             menuVisible: !this.state.menuVisible
         })
     }
-    
-    // this.setState({ menuVisible: !this.state.menuVisible })
+
 
     componentDidMount() {
-        let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYWM3MTdjMTYyNTBkNDU3MGVjNjNjMCIsImlhdCI6MTUyMTU3Njg0MywiZXhwIjoxNTIxODM2MDQzfQ.IM4huDfZs5Yzy_UZNyz01kNtkPqQB2DbHA8Ddy_C2D8'
         axios.post(`${config.serverUrl}/profile`, {
-            token: token,
+            token: config.token,
         })
             .then(response => {
                 let cats = this.state.cats.concat(response.data.categories)
@@ -62,7 +62,6 @@ class Main extends Component {
                 console.log(e)
             })
     }
-
 
     render() {
         return (
@@ -78,11 +77,12 @@ class Main extends Component {
                         animation='overlay' 
                         width='wide' 
                         visible={this.state.menuVisible} 
-                        // icon='labeled' 
                         vertical 
                         inverted
                         >
-                        <LeftMenu />
+                        <LeftMenu 
+                            updateCats={this.updateCats}
+                        />
                     </Sidebar>
                     <Sidebar.Pusher>
                             <Articles

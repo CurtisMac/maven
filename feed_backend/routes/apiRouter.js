@@ -54,8 +54,8 @@ apiRouter.post('/toread', async (req, res) => {
     }
 })
 
-apiRouter.post('/categories', async (req, res) => {
-    const { cat, method } = req.headers
+apiRouter.post('/categories', contr.veriftyJWT, async (req, res) => {
+    const { cat, method } = req.body
     const { id } = req.decoded
     const data = method === 'push' ?
         {

@@ -4,7 +4,7 @@ const parseString = require('xml2js').parseString
 const ArticleObj = require('../methods/articleConstructor')
 
 const twingly = ({ lang, query }) => {
-    const url = `https://api.twingly.com/blog/search/api/v3/search?apikey=${keys.twingly}&q=${query}%20lang:${lang}%20sort:twinglyrank%20page-size:200`
+    const url = `https://api.twingly.com/blog/search/api/v3/search?apikey=${keys.twingly}&q=${query}%20lang:${lang}%20sort:twinglyrank%20page-size:20`
     return axios.get(url)
         .then(response => {
             let rawData

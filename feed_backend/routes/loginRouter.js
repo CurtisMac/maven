@@ -2,7 +2,7 @@ const express = require('express')
 const loginRouter = express.Router()
 const contr = require('../controllers/loginControllers')
 
-loginRouter.post('/login', async (req, res) => {
+loginRouter.post('/', async (req, res) => {
     try {
         const { username, password } = req.body
         res.json(await contr.login(username, password))

@@ -3,10 +3,12 @@ import { Item, Label } from 'semantic-ui-react'
 const faker = require('faker')
 
 function Article(props) {
-    let a = props.data
+    const a = props.data
+    let img = `/images/${Math.floor(Math.random() * 40) + 1  }.jpg`
+
     return (
         <Item>
-            <Item.Image size='tiny' src={faker.random.image()} />
+            <Item.Image size='small' src={img} />
             <Item.Content>
                 <Item.Header><a href={a.url} target='_blank'>{a.title}</a></Item.Header>
                 <Item.Meta>
@@ -22,18 +24,3 @@ function Article(props) {
 }
 
 export default Article
-
-        // < Card >
-        //     <Card.Content>
-        //         <Card.Header>
-        //             {a.title}
-        //         </Card.Header>
-        //     </Card.Content>
-        //     <Card.Description>
-        //         {a.summary}
-        //     </Card.Description>
-        //     <Card.Content extra>
-        //         <Icon name='user' />
-        //         {a.rank}
-        //     </Card.Content>
-        // </Card >

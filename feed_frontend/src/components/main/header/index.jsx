@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import colors  from '../../../assets/palette'
 import CatButton from './catButton'
+import { Menu, Icon } from 'semantic-ui-react'
 
 
 const divStyles = {
@@ -30,6 +31,7 @@ class Header extends Component {
             <div style={divStyles}>
                 <h1 style={divStyles.h1}>Maven</h1>
                 <nav style={divStyles.nav}>{catButtons}</nav>
+                <Icon name="sidebar" onClick={this.props.menuToggle}/>
             </div >
         )
     }

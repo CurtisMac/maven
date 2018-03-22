@@ -10,10 +10,16 @@ import Header from './header'
 import LeftMenu from './sidebar'
 import Articles from './articles'
 
+const divStyles = {
+    minHeight: '800px'
+}
+
 class Main extends Component {
     constructor() {
         super()
         this.state = {
+            loggedIn: true,
+            username: 'curtis',
             cats: [],
             articles: [],
             currentCat: 'All',
@@ -77,8 +83,11 @@ class Main extends Component {
                     cats={this.state.cats}
                     catFilter={this.catFilter}
                     menuToggle={this.menuToggle}
+                    username={this.state.username}
+                    loggedIn={this.state.username}
                 />
-                <Sidebar.Pushable attached="bottom">
+                <Sidebar.Pushable attached="bottom"
+                    style={divStyles}>
                     <Sidebar 
                         as={Menu} 
                         animation='overlay' 

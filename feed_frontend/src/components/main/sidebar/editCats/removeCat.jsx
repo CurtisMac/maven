@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Form, Dropdown } from 'semantic-ui-react'
+import { Button, Dropdown } from 'semantic-ui-react'
 import config from '../../../../assets/config'
 import axios from 'axios'
 
@@ -54,15 +54,6 @@ class RemoveCat extends Component {
                 />
                 <Button>Delete</Button>
             </Button.Group>
-
-
-            // <Form onSubmit={this.handleSubmit}>
-            //     <Dropdown
-            //         placeholder='Select category'
-            //         options={selectCat}
-            //     />
-            //     <Form.Button />
-            // </Form>
         )
     }
 }

@@ -1,14 +1,7 @@
 import React, { Component } from 'react'
 import Main from './main'
-// import {Container} from 'semantic-ui-react'
 
 class App extends Component {
-  constructor(){
-    super()
-    this.state = {
-      something: 'h1'
-    }
-  }
 
   render() {
     return (

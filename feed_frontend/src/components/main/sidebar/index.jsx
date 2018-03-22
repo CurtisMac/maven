@@ -4,20 +4,20 @@ import EditCats from './editCats/index'
 
 function LeftMenu(props) {
     return (
-            <div>
-                <Menu.Item name='home'>
-                    <Icon name='home' />
-                    Home
+        <div>
+            <Menu.Item name='home'>
+                <Icon name='home' />
+                Home
                 </Menu.Item>
-                <EditCats 
-                    refreshData={props.refreshData}
-                    cats={props.cats}
-                />
-                <Menu.Item name='camera'>
-                    <Icon name='camera' />
-                    Channels
+            <EditCats
+                refreshData={props.refreshData}
+                cats={props.cats}
+            />
+            <Menu.Item name='camera'>
+                <Icon name='camera' />
+                Channels
                 </Menu.Item>
-            </div>
+        </div>
     )
 }
 

@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {Button} from 'semantic-ui-react'
+import colors from '../../../assets/palette'
 
 const divStyles = {
     marginTop: 3
@@ -10,9 +11,9 @@ class CatButton extends Component {
         return (
             <Button
                 style={divStyles} 
-                circular 
-                inverted 
+                color={colors.catButtons}
                 size='tiny' 
+                circular={colors.catButtonCircle}
                 onClick={()=>{this.props.catFilter(this.props.cat)}}
                 >{this.props.cat}
             </Button>

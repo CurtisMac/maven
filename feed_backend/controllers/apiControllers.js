@@ -28,8 +28,8 @@ const contr = {
 
     getProfile: async (id) => {
         try {
+            await getCurrentSugs(id)
             let data = await User.findById(id)
-            // await getCurrentSugs(id)
             let articles = await convertArticleIds(data.currentSuggestions)
             return {
                 languages: data.languages,
@@ -54,9 +54,11 @@ const contr = {
     },
 
     updateUserArray: async (data, method, array, id) => {
+        console.log('updateUserArray called')
         try {
             const user = await User.findById(id)
             if (method === 'push') {
+                console.log(id)
                 user[array].push(data)
             } else if (method === 'pull') {
                 user[array].pull(data)

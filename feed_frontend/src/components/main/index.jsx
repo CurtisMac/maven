@@ -5,6 +5,7 @@ import {Menu, Sidebar} from 'semantic-ui-react'
 import Header from './header'
 import LeftMenu from './sidebar'
 import Articles from './articles'
+import LandingPage from '../landingPage'
 
 const divStyles = {
     minHeight: '800px'
@@ -105,28 +106,32 @@ class Main extends Component {
                     refreshData={this.refreshData}
                     resetData={this.resetData}
                 />
-                <Sidebar.Pushable attached="bottom"
-                    style={divStyles}>
-                    <Sidebar 
-                        as={Menu} 
-                        animation='overlay' 
-                        width='wide' 
-                        visible={this.state.menuVisible} 
-                        vertical 
-                        inverted
-                        >
-                        <LeftMenu 
-                            refreshData={this.refreshData}
-                            cats={this.state.cats}
-                        />
-                    </Sidebar>
-                    <Sidebar.Pusher>
-                            <Articles
-                                currentCat={this.state.currentCat}
-                                articles={this.state.articles}
+                {this.state.loggedIn?
+                    <Sidebar.Pushable attached="bottom"
+                        style={divStyles}>
+                        <Sidebar 
+                            as={Menu} 
+                            animation='overlay' 
+                            width='wide' 
+                            visible={this.state.menuVisible} 
+                            vertical 
+                            inverted
+                            >
+                            <LeftMenu 
+                                refreshData={this.refreshData}
+                                cats={this.state.cats}
                             />
-                    </Sidebar.Pusher>
-                </Sidebar.Pushable>
+                        </Sidebar>
+                        <Sidebar.Pusher>
+                                <Articles
+                                    currentCat={this.state.currentCat}
+                                    articles={this.state.articles}
+                                />
+                        </Sidebar.Pusher>
+                    </Sidebar.Pushable>
+                    :
+                    <LandingPage />
+                }
             </div>
         )
     }

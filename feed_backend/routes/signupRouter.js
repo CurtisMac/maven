@@ -2,16 +2,17 @@ const express = require('express')
 const signupRouter = express.Router()
 const contr = require('../controllers/signupControllers')
 
-signupRouter.route('/signup')
-    .get(async (req, res) => {
+signupRouter.route('/')
+    .post(async (req, res) => {
         try {
-            let { username } = req.query
+            let { username } = req.body
         res.json(await contr.checkUsername(username))
         } catch (e) {
             res.json(e)
         }
     })
-    .post(async (req, res) => {
+    .put(async (req, res) => {
+        console.log(req.body)
         try {
             let { username, password } = req.body
             res.json(await contr.createAccount(username, password))

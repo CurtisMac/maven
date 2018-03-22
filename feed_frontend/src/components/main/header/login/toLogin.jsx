@@ -74,17 +74,15 @@ class ToLogin extends Component {
                                     icon='user'
                                     iconPosition='left'
                                     placeholder='Username:'
-                                    tabIndex={1}
                                     name='username'
                                     value={this.state.username}
                                     onChange={this.handleChange}
                                 />
                                 <Form.Input
-                                    icon='key'
+                                    icon='lock'
                                     iconPosition='left'
                                     placeholder='Password:'
                                     type='password'
-                                    tabIndex={2}
                                     name='password'
                                     value={this.state.password}
                                     onChange={this.handleChange}

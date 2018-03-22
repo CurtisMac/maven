@@ -17,7 +17,8 @@ const contr = {
                 username: username.toLowerCase(),
                 password
             })
-            return await newUser.save()
+            await newUser.save()
+            return { success: true }
         } catch (e) {
             console.error(e)
             return {success: false}

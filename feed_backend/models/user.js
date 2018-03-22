@@ -1,32 +1,11 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const toReadSchema = new Schema({
-    articleId: 
-    {
-        type: String,
-        required: true,
-        unique: true,    
-    },
-    read: Boolean,
-})
-
-const archiveSchema = new Schema({
-    articleId:
-        {
-            type: String,
-            required: true,
-            unique: true,
-        },
-    notes: String,
-})
-
 const categoriesSchema = new Schema({
     name:
         {
             type: String,
             required: true,
-            unique: true,
         },
     lastUpdate: Date,
 })
@@ -45,8 +24,7 @@ const userSchema = new Schema({
     languages: [],
     categories: [categoriesSchema],
     currentSuggestions: [],
-    toRead: [toReadSchema],
-    archive: [archiveSchema]
+    toRead:[]
 })
 
 const User = mongoose.model('User', userSchema)

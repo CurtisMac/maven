@@ -3,8 +3,10 @@ const colors = {
     secondary: 'blue',
     accent: 'black',
     text: 'white',
-    catButtons: 'olive',
-    catButtonActive: 'teal',
+    text2: 'red',
+    catButtons: 'red',
+    signUpButton: 'red',
+    catButtonActive: 'google plus',
     catButtonCircle: false
 }
 

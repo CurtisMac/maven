@@ -4,10 +4,12 @@ import colors from '../../../assets/palette'
 
 const divStyles = {
     active: {
-        backgroundColor: colors.catButtonActive
+        backgroundColor: colors.catButtonActive,
+        marginBottom: '5px'
     },
      inactive: {
-        backgroundColor: colors.catButton
+         backgroundColor: colors.catButton,
+         marginBottom: '5px'
     }
 }
 

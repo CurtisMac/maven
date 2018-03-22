@@ -21,7 +21,5 @@ app.use('/login', loginRouter)
 app.use('/signup', signupRouter)
 app.use('/', apiRouter)
 
-const getCurrentSugs = require('./methods/getCurrentSugs')
-const updUserSug = require('./methods/updUserSug')
 
 module.exports = app

@@ -17,9 +17,9 @@ class RemoveCat extends Component {
 
     handleSubmit = () => {
         if (this.state.selected) {
-            console.log(this.state.selected)
+            let token = localStorage.getItem('token')
             axios.post(`${config.serverUrl}/categories`, {
-                token: config.token,
+                token: JSON.parse(token),
                 method: 'pull',
                 cat: this.state.selected
             })

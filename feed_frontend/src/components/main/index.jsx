@@ -18,7 +18,7 @@ class Main extends Component {
     constructor() {
         super()
         this.state = {
-            loggedIn: true,
+            loggedIn: false,
             username: 'curtis',
             cats: [],
             articles: [],
@@ -47,22 +47,29 @@ class Main extends Component {
     }
 
     refreshData = () => {
-        axios.post(`${config.serverUrl}/profile`, {
-            token: config.token,
-        })
-            .then(response => {
-                console.log(response.data)
-                let originalCat = [{ name: 'All', id: 0 }]
-                let cats = originalCat.concat(response.data.categories)
-                this.setState({
-                    cats: cats,
-                    articles: response.data.articles
+        let token = localStorage.getItem('token')
+        console.log(token)
+        if(token){
+            console.log('hi')
+            axios.post(`${config.serverUrl}/profile`, {
+                token: JSON.parse(token),
+            })
+                .then(response => {
+                    console.log(response.status)
+                    if(response.status===200){
+                        let originalCat = [{ name: 'All', id: 0 }]
+                        let cats = originalCat.concat(response.data.categories)
+                        this.setState({
+                            cats: cats,
+                            articles: response.data.articles,
+                            loggedIn: true
+                        })
+                    }
                 })
-                console.log(this.state.cats)
-            })
-            .catch(e => {
-                console.log(e)
-            })
+                .catch(e => {
+                    console.log(e)
+                })
+        }
     }
 
     menuToggle = () => {

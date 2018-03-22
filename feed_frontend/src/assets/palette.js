@@ -1,9 +1,9 @@
 const colors = {
     primary: 'blue',
-    secondary: 'black',
+    secondary: 'blue',
     accent: 'black',
     text: 'white',
-    catButtons: 'red',
+    catButtons: 'olive',
     catButtonCircle: false
 }
 

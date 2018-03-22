@@ -17,9 +17,10 @@ class AddCat extends Component {
 
     handleSubmit = () => {
         let entry = this.state.name
+        let token = localStorage.getItem('token')
         if(entry){
             axios.post(`${config.serverUrl}/categories`, {
-                token: config.token,
+                token: JSON.parse(token),
                 method: 'push',
                 cat: entry
             })

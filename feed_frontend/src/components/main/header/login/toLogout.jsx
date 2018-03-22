@@ -3,17 +3,17 @@ import { Dropdown, Icon } from 'semantic-ui-react'
 
 class ToLogout extends Component {
     handleChange = (e, { value }) => {
-        //'if' not strictly necessary, allow for more options to be added to dropdown
+        //'if' not strictly necessary, it is here to allow for more options to be added to dropdown in future
         if(value==='logout'){
             this.props.toggleLogin()
-            //delete JWT token here
+            localStorage.removeItem('token')
         }
     }
 
     render() {
         const trigger = (
             <span>
-                <Icon name='user' />
+                <Icon name='user circle' />
                 Hello, {this.props.username}
             </span>
         )

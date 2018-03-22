@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import colors from '../../../assets/palette'
 import CatButton from './catButton'
 import { Icon, Segment } from 'semantic-ui-react'
@@ -17,13 +17,13 @@ const divStyles = {
     }
 }
 
-class Header extends Component {
-    render() {
-        const catButtons = this.props.cats.map((obj, i) => {
+function Header(props){
+        const catButtons = props.cats.map((obj, i) => {
             return <CatButton
                 key={obj.id}
                 cat={obj.name}
-                catFilter={this.props.catFilter}
+                catFilter={props.catFilter}
+                currentCat={props.currentCat}
             />
         })
         return (
@@ -44,9 +44,11 @@ class Header extends Component {
                         inverted
                     >
                         <Login
-                            username={this.props.username}
-                            toggleLogin={this.props.toggleLogin}
-                            loggedIn={this.props.loggedIn}
+                            username={props.username}
+                            toggleLogin={props.toggleLogin}
+                            loggedIn={props.loggedIn}
+                            refreshData={props.refreshData}
+                            resetData={props.resetData}
                         />
                     </Segment>
                 </Segment.Group>
@@ -64,21 +66,12 @@ class Header extends Component {
                 >
                     <Icon
                         name="sidebar"
-                        onClick={this.props.menuToggle}
+                        onClick={props.menuToggle}
                     />
                 </Segment>
             </Segment.Group >
 
-
-
-
-            // <div style={divStyles}>
-            //     <h1 style={divStyles.h1}>Maven</h1>
-            //     <nav style={divStyles.nav}>{catButtons}</nav>
-            //     <Icon name="sidebar" onClick={this.props.menuToggle}/>
-            // </div >
         )
-    }
 }
 
 export default Header

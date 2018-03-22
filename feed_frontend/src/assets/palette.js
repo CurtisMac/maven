@@ -4,6 +4,7 @@ const colors = {
     accent: 'black',
     text: 'white',
     catButtons: 'olive',
+    catButtonActive: 'teal',
     catButtonCircle: false
 }
 

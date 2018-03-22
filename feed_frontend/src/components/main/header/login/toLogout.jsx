@@ -7,6 +7,7 @@ class ToLogout extends Component {
         if(value==='logout'){
             this.props.toggleLogin()
             localStorage.removeItem('token')
+            this.props.resetData()
         }
     }
 

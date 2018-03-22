@@ -1,11 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import config from '../../assets/config'
-// import palette from '../../assets/palette'
-
 import {Menu, Sidebar} from 'semantic-ui-react'
-
-//Import components here
 import Header from './header'
 import LeftMenu from './sidebar'
 import Articles from './articles'
@@ -19,7 +15,7 @@ class Main extends Component {
         super()
         this.state = {
             loggedIn: false,
-            username: 'curtis',
+            username: '',
             cats: [],
             articles: [],
             currentCat: 'All',
@@ -48,21 +44,19 @@ class Main extends Component {
 
     refreshData = () => {
         let token = localStorage.getItem('token')
-        console.log(token)
         if(token){
-            console.log('hi')
             axios.post(`${config.serverUrl}/profile`, {
                 token: JSON.parse(token),
             })
                 .then(response => {
-                    console.log(response.status)
                     if(response.status===200){
                         let originalCat = [{ name: 'All', id: 0 }]
                         let cats = originalCat.concat(response.data.categories)
                         this.setState({
                             cats: cats,
                             articles: response.data.articles,
-                            loggedIn: true
+                            loggedIn: true,
+                            username: response.data.username
                         })
                     }
                 })
@@ -70,6 +64,14 @@ class Main extends Component {
                     console.log(e)
                 })
         }
+    }
+
+    resetData = ()=>{
+        this.setState({
+            cats: [],
+            articles: [],
+            username: ''
+        })
     }
 
     menuToggle = () => {
@@ -99,6 +101,9 @@ class Main extends Component {
                     username={this.state.username}
                     toggleLogin={this.toggleLogin}
                     loggedIn={this.state.loggedIn}
+                    currentCat={this.state.currentCat}
+                    refreshData={this.refreshData}
+                    resetData={this.resetData}
                 />
                 <Sidebar.Pushable attached="bottom"
                     style={divStyles}>

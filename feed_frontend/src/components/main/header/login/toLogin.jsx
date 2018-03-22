@@ -29,9 +29,9 @@ class ToLogin extends Component {
         })
             .then(response => {
                 if(response.data.success){
-                    console.log(response.data.token)
                     localStorage.setItem('token', JSON.stringify(response.data.token))
                     this.props.toggleLogin()
+                    this.props.refreshData()
                 } else {
                     alert('Wrong username/password combination!')
                 }

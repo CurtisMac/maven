@@ -40,6 +40,7 @@ const contr = {
                         }
                 }),
                 toRead: data.toRead,
+                username: data.username,
                 haveRead: data.haveRead,
                 articles: articles
             }

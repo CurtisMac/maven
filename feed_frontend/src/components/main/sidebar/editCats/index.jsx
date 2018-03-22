@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Menu, Icon} from 'semantic-ui-react'
-
 import AddCat from './addCat'
 import RemoveCat from './removeCat'
 

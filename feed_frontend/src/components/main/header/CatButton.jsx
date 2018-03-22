@@ -1,24 +1,31 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {Button} from 'semantic-ui-react'
 import colors from '../../../assets/palette'
 
 const divStyles = {
-    marginTop: 3
+    active: {
+        backgroundColor: colors.catButtonActive
+    },
+     inactive: {
+        backgroundColor: colors.catButton
+    }
 }
 
-class CatButton extends Component {
-    render(){
-        return (
-            <Button
-                style={divStyles} 
-                color={colors.catButtons}
-                size='tiny' 
-                circular={colors.catButtonCircle}
-                onClick={()=>{this.props.catFilter(this.props.cat)}}
-                >{this.props.cat}
-            </Button>
-        )
-    }
+function CatButton(props) {
+    return (
+        <Button
+            style={props.currentCat===props.cat ?
+                divStyles.active:
+                divStyles.inactive
+            } 
+            color={colors.catButtons}
+            size='tiny' 
+            circular={colors.catButtonCircle}
+            onClick={()=>{props.catFilter(props.cat)}}
+            >{props.cat}
+        </Button>
+    )
+    
 }
 
 export default CatButton

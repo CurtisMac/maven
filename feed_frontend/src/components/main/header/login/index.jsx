@@ -9,9 +9,11 @@ function Login(props) {
                 <ToLogout
                     username={props.username}
                     toggleLogin={props.toggleLogin}
+                    resetData={props.resetData}
                 /> :
                 <ToLogin
                     toggleLogin={props.toggleLogin}
+                    refreshData={props.refreshData}
                  />
             }
         </div>

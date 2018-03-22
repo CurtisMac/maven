@@ -1,11 +1,22 @@
 import React from 'react'
+import ToLogout from './toLogout'
+import ToLogin from './toLogin'
 
-function Login(){
+function Login(props) {
     return (
         <div>
-            Please login
+            {props.loggedIn ?
+                <ToLogout
+                    username={props.username}
+                    toggleLogin={props.toggleLogin}
+                /> :
+                <ToLogin
+                    toggleLogin={props.toggleLogin}
+                 />
+            }
         </div>
     )
 }
+
 
 export default Login

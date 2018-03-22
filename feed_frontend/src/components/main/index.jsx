@@ -71,6 +71,12 @@ class Main extends Component {
         })
     }
 
+    toggleLogin = () => {
+        this.setState({
+            loggedIn: !this.state.loggedIn
+        })
+
+    }
 
     componentDidMount() {
         this.refreshData()
@@ -84,7 +90,8 @@ class Main extends Component {
                     catFilter={this.catFilter}
                     menuToggle={this.menuToggle}
                     username={this.state.username}
-                    loggedIn={this.state.username}
+                    toggleLogin={this.toggleLogin}
+                    loggedIn={this.state.loggedIn}
                 />
                 <Sidebar.Pushable attached="bottom"
                     style={divStyles}>

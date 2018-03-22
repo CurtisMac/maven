@@ -43,7 +43,11 @@ class Header extends Component {
                         textAlign={'right'}
                         inverted
                     >
-                        <Login />
+                        <Login
+                            username={this.props.username}
+                            toggleLogin={this.props.toggleLogin}
+                            loggedIn={this.props.loggedIn}
+                        />
                     </Segment>
                 </Segment.Group>
                 <Segment

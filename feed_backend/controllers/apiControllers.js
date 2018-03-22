@@ -29,8 +29,8 @@ const contr = {
     getProfile: async (id) => {
         try {
             let data = await User.findById(id)
+            // await getCurrentSugs(id)
             let articles = await convertArticleIds(data.currentSuggestions)
-            // getCurrentSugs(id)
             return {
                 languages: data.languages,
                 categories: data.categories.map((obj)=>{

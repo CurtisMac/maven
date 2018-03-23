@@ -2,13 +2,13 @@ const keys = require('./keys')
 const axios = require('axios')
 const parseString = require('xml2js').parseString
 const ArticleObj = require('../methods/articleConstructor')
+const config = require('../config')
 
 const twingly = ({ lang, query }) => {
     //...page-size:(num) at end of url controls how many articles twingly returns. Intentionally set low for testing during development
-    const url = `https://api.twingly.com/blog/search/api/v3/search?apikey=${keys.twingly}&q=${query}%20lang:${lang}%20sort:twinglyrank%20page-size:15`
+    const url = `https://api.twingly.com/blog/search/api/v3/search?apikey=${keys.twingly}&q=${query}%20lang:${lang}%20sort:twinglyrank%20page-size:${config.maxArticlesTwingly}`
     return axios.get(url)
         .then(response => {
-            console.log('Quried Twingly')
             let rawData
             parseString(response.data, function (err, result) {
                 rawData = result.twinglydata.post

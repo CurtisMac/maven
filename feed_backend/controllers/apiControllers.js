@@ -84,14 +84,14 @@ const contr = {
                 next()
             } catch (e) {
                 console.error(e)
-                return res.status(403).send({
+                return res.json({
                     success: false,
                     error: 'Invalid Token'
                 })
             }
         } else {
             console.log('no key')
-            return res.status(403).send({
+            return res.json({
                 success: false,
                 error: 'No token provided'
             })

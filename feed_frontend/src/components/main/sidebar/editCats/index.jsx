@@ -10,9 +10,18 @@ class EditCats extends Component {
             activeView: 'none'
         }
     }
+
+    componentWillReceiveProps(props){
+        if(props.menuVisible===false){
+            this.setState({
+                activeView: 'none'
+            })
+        }
+    }
+
     render() {
         return (
-            <Menu.Item name='Edit Categories'>
+            <Menu.Item name='Edit Categories' >
                 <Icon name='pencil' />
                 <Menu.Header 
                     onClick={()=>{this.setState({activeView:'none'})}}>

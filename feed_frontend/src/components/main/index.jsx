@@ -1,14 +1,22 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import config from '../../assets/config'
-import {Menu, Sidebar} from 'semantic-ui-react'
+import {Menu, Sidebar, Dimmer, Loader} from 'semantic-ui-react'
 import Header from './header'
 import LeftMenu from './sidebar'
 import Articles from './articles'
 import LandingPage from '../landingPage'
 
 const divStyles = {
-    minHeight: '800px'
+    minHeight: '800px',
+    text: {
+        fontFamily: 'Mina',
+        textAlign: 'center',
+        marginTop: '20px'
+    },
+    dimmer: {
+        marginTop: '0'
+    }
 }
 
 class Main extends Component {
@@ -20,7 +28,9 @@ class Main extends Component {
             cats: [],
             articles: [false],
             currentCat: 'All',
-            menuVisible: false
+            menuVisible: false,
+            loading: false,
+            sortBy: 'date'
         }
     }
 
@@ -46,24 +56,45 @@ class Main extends Component {
     refreshData = () => {
         let token = localStorage.getItem('token')
         if(token){
+            this.setState({
+                loading: true
+            })
             axios.post(`${config.serverUrl}/profile`, {
                 token: JSON.parse(token),
             })
                 .then(response => {
-                    if(response.status===200){
+                    if(response.status===200 && response.data.success !== false){
                         let originalCat = [{ name: 'All', id: 0 }]
                         let cats = originalCat.concat(response.data.categories)
                         this.setState({
                             cats: cats,
                             articles: response.data.articles,
                             loggedIn: true,
-                            username: response.data.username
+                            username: response.data.username,
+                            loading: false,
+                            menuVisible: false,
+                        })
+                    } else {
+                        this.setState({
+                            loading: false
                         })
                     }
                 })
                 .catch(e => {
                     console.log(e)
                 })
+        }
+    }
+
+    sortMethod = () => {
+        if (this.state.sortBy === 'date') {
+            this.setState({
+                sortBy: 'rank'
+            })
+        } else if (this.state.sortBy === 'rank') {
+            this.setState({
+                sortBy: 'date'
+            })
         }
     }
 
@@ -95,6 +126,11 @@ class Main extends Component {
     render() {
         return (
             <div>
+                <Dimmer 
+                    active={this.state.loading}
+                    style={divStyles.dimmer}>
+                    <Loader />
+                </Dimmer>
                 <Header
                     cats={this.state.cats}
                     catFilter={this.catFilter}
@@ -105,6 +141,8 @@ class Main extends Component {
                     currentCat={this.state.currentCat}
                     refreshData={this.refreshData}
                     resetData={this.resetData}
+                    sortMethod={this.sortMethod}
+
                 />
                 {this.state.loggedIn?
                     <Sidebar.Pushable attached="bottom"
@@ -120,11 +158,12 @@ class Main extends Component {
                             <LeftMenu 
                                 refreshData={this.refreshData}
                                 cats={this.state.cats}
+                                menuVisible={this.state.menuVisible}
                             />
                         </Sidebar>
                         <Sidebar.Pusher>
                             {!this.state.articles[0] ?
-                            <div>
+                            <div style={divStyles.text}>
                                 <h1>Welcome to Maven, {this.state.username}!</h1>
                                 <p>To get started, open the menu on the left and add some new categories. Categories are keywords, so should only be one or two words long</p>
                             </div>
@@ -132,6 +171,7 @@ class Main extends Component {
                                 <Articles
                                     currentCat={this.state.currentCat}
                                     articles={this.state.articles}
+                                    sortBy={this.state.sortBy}
                                 />
                             }
                         </Sidebar.Pusher>

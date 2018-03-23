@@ -27,7 +27,6 @@ function CatButton(props) {
             >{props.cat}
         </Button>
     )
-    
 }
 
 export default CatButton

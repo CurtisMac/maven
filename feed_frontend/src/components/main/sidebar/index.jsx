@@ -12,6 +12,7 @@ function LeftMenu(props) {
             <EditCats
                 refreshData={props.refreshData}
                 cats={props.cats}
+                menuVisible={props.menuVisible}
             />
             <Menu.Item name='camera'>
                 <Icon name='camera' />

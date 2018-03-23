@@ -3,12 +3,16 @@ import { Item, Label, Icon } from 'semantic-ui-react'
 import colors from '../../../assets/palette'
 import pretty from 'pretty-date-js'
 
+const divStyles = {
+    fontFamily: 'Lato',
+}
+
 function Article(props) {
     const a = props.data
     let img = `/images/${Math.floor(Math.random() * 40) + 1  }.jpg`
     const date = pretty(a.pubDate)
     return (
-        <Item>
+        <Item style={divStyles}>
             <Item.Image size='small' src={img} />
             <Item.Content>
                 <Item.Header>
@@ -18,14 +22,14 @@ function Article(props) {
                         {a.title}
                     </a>
                 </Item.Header>
-                <Item.Description>
-                    {`Published ${date.value} ${date.lang} ${date.misc}`}
-                </Item.Description>
                 <Item.Meta>
-                    <span className='cinema'>{a.summary}</span>
+                    {`Published ${date.value} ${date.lang} ${date.misc}`}
                 </Item.Meta>
-                <Item.Description>By {a.authors[0]}</Item.Description>
-                <Item.Description>Source: {a.src.title}</Item.Description>
+                <Item.Description>
+                    <span className='cinema'>{a.summary}</span>
+                </Item.Description>
+                <Item.Meta>By {a.authors[0]}</Item.Meta>
+                <Item.Meta>Source: {a.src.title}</Item.Meta>
                 <Item.Extra>
                     <Label
                         color={colors.artLabel}

@@ -1,6 +1,7 @@
 const User = require('../models/user')
 const Article = require('../models/article')
 const updUserSug = require('../methods/updUserSug')
+const config = require('../config')
 
 //Takes array of categories and updates user's profile for those categories
 
@@ -12,7 +13,8 @@ const updateUser = async (userId, array) => {
                     const regex = new RegExp(catObj.name, 'i')
                     await Article.find({ tags: regex })
                         .where('addDate').gte(catObj.lastUpdate)
-                        .where('rank').gte(0)
+                        .sort({rank : 'desc'})
+                        .limit(config.maxArticlesReturned)
                         .exec(async (e, result) => {
                             try {
                                 let ids = result.map(obj => {

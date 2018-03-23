@@ -8,7 +8,7 @@ const colors = {
     artLabel: 'red',
     artLabelCircle: false,
     signUpButton: 'red',
-    catButtonActive: 'google plus',
+    catButtonActive: '#912121',
     catButtonCircle: false
 }
 

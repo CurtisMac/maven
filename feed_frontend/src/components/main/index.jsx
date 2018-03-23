@@ -8,7 +8,7 @@ import Articles from './articles'
 import LandingPage from '../landingPage'
 
 const divStyles = {
-    minHeight: '800px',
+    minHeight: '1100px',
     text: {
         fontFamily: 'Mina',
         textAlign: 'center',

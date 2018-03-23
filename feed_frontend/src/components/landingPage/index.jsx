@@ -1,6 +1,5 @@
 import React from 'react'
 import SignUp from './signUp'
-import colors from '../../assets/palette'
 
 const divStyles = {
     fontFamily: 'Mina',

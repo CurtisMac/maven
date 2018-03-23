@@ -12,7 +12,7 @@ const updateUser = async (userId, array) => {
                     const regex = new RegExp(catObj.name, 'i')
                     await Article.find({ tags: regex })
                         .where('addDate').gte(catObj.lastUpdate)
-                        .where('rank').gte(1000)
+                        .where('rank').gte(0)
                         .exec(async (e, result) => {
                             try {
                                 let ids = result.map(obj => {

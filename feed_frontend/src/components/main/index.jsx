@@ -18,7 +18,7 @@ class Main extends Component {
             loggedIn: false,
             username: '',
             cats: [],
-            articles: [],
+            articles: [false],
             currentCat: 'All',
             menuVisible: false
         }
@@ -123,10 +123,17 @@ class Main extends Component {
                             />
                         </Sidebar>
                         <Sidebar.Pusher>
+                            {!this.state.articles[0] ?
+                            <div>
+                                <h1>Welcome to Maven, {this.state.username}!</h1>
+                                <p>To get started, open the menu on the left and add some new categories. Categories are keywords, so should only be one or two words long</p>
+                            </div>
+                            :
                                 <Articles
                                     currentCat={this.state.currentCat}
                                     articles={this.state.articles}
                                 />
+                            }
                         </Sidebar.Pusher>
                     </Sidebar.Pushable>
                     :

@@ -5,6 +5,8 @@ const colors = {
     text: 'white',
     text2: 'red',
     catButtons: 'red',
+    artLabel: 'red',
+    artLabelCircle: false,
     signUpButton: 'red',
     catButtonActive: 'google plus',
     catButtonCircle: false
